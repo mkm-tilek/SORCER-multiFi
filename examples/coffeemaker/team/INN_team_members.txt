@@ -1,0 +1,13 @@
+
+PJATK INN - Software Engineering
+
+
+Members:
+
+1) Ulzhan Akmurat s25740
+2) Tilek Mukambetov s25548
+3) Artem Kholodenko s25546
+
+Repository:
+
+https://github.com/mkm-tilek/SORCER-multiFi
