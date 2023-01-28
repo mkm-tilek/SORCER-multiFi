@@ -123,5 +123,38 @@ public class CoffeeMakerTest {
 		assertEquals(coffeeMaker.makeCoffee(espresso, 200), 150);
 	}
 
+	/**
+	 * Checking inventory
+	 */
+	@Test
+	public void testCheckInventory(){
+		inventory.setCoffee(250);
+		inventory.setSugar(250);
+		inventory.setChocolate(250);
+		inventory.setMilk(250);
+		assertEquals(coffeeMaker.checkInventory().getChocolate(), 250);
+		assertEquals(coffeeMaker.checkInventory().getSugar(), 250);
+		assertEquals(coffeeMaker.checkInventory().getMilk(), 250);
+		assertEquals(coffeeMaker.checkInventory().getCoffee(), 250);
+	}
+
+	/**
+	 * In inventory.setCoffee() method the amount of coffee in inventory should be decreased by the value from Recipe instead of increasing it.
+	 */
+	@Test
+	public void testMakeCoffee() {
+		inventory.setChocolate(250);
+		inventory.setCoffee(250);
+		inventory.setSugar(250);
+		inventory.setMilk(250);
+		assertEquals(coffeeMaker.checkInventory().getChocolate(), 250);
+		assertEquals(coffeeMaker.checkInventory().getCoffee(), 250);
+		assertEquals(coffeeMaker.checkInventory().getSugar(), 250);
+		assertEquals(coffeeMaker.checkInventory().getMilk(), 250);
+
+		coffeeMaker.makeCoffee(mocha, 250);
+		assertEquals(coffeeMaker.checkInventory().getChocolate(), 250-mocha.getAmtChocolate());
+	}
+
 }
 
