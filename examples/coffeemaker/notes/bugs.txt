@@ -1,0 +1,34 @@
+BUGS:
+
+CoffeMaker Class
+
+#0 line 26:
+By user story the maximum number of recipes is defined as 3, so NUM_RECIPES should be changed to 3.
+
+#1 line 67:
+addRecipe()
+True value is already assigned to variable. This code is ambiguous and should removed.
+
+#2 line 93:
+deleteRecipe()
+Element in recipeArray is assigned to same Recipe object instead of deleting it (setting default Recipe).
+Element in recipeFull should be assignrd to false value.
+
+#3 line 114:
+deleteRecipes()
+Defined variable canDeleteRecipes will always return true. 
+Function should be defined as void or just return true.
+
+#4 line 125:
+editRecipe()
+oldRecipe.getName() should be compared with newRecipe.getName() instead of comparing with null. 
+So it should not contain 2 identical recipes.
+line 127: Element of recipeArray should be compared with oldRecipe instead of newRecipe.
+
+#5 line 151:
+addInventory()
+Comparison sign for sugar value should be changed to "<", it should check if value is not negative.
+
+#6 line 187:
+makeCoffee()
+In inventory.setCoffee() method the amount of coffee in inventory should be decreased by the value from Recipe instead of increasing it.

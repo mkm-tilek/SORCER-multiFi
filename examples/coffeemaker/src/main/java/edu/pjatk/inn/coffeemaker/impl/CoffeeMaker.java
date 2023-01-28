@@ -10,6 +10,7 @@ import sorcer.service.ContextException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author   Sarah & Mike
@@ -88,8 +89,9 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
         boolean canDeleteRecipe = false;
         if(r != null) {
 	        for(int i = 0; i < NUM_RECIPES; i++) {
-	            if(r.equals(recipeArray[i])) {
-	                recipeArray[i] = recipeArray[i];  
+	            if(recipeFull[i] && r.equals(recipeArray[i])) {
+	                recipeArray[i] = new Recipe();
+					recipeFull[i] = false;
 	                canDeleteRecipe = true;
 	            }
 	        }
@@ -98,18 +100,16 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
     }
 
 	/**
-	 * Returns true if the recipe were deleted from the
+	 * Returns true if the recipes were deleted from the
 	 * coffee maker
 	 * @return boolean
 	 */
 	public boolean deleteRecipes() {
-		boolean canDeleteRecipes = false;
 		for (int i = 0; i < NUM_RECIPES; i++) {
 			recipeArray[i] = new Recipe();
 			recipeFull[i] = false;
-			canDeleteRecipes = true;
 		}
-		return canDeleteRecipes;
+		return true;
 	}
 
     /**
@@ -120,9 +120,9 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
      */
     public boolean editRecipe(Recipe oldRecipe, Recipe newRecipe) {
         boolean canEditRecipe = false;
-        for(int i = 0; i < NUM_RECIPES; i++) {
-        	if(recipeArray[i].getName() != null) {
-	            if(newRecipe.equals(recipeArray[i])) {
+		if(!Objects.equals(oldRecipe.getName(), newRecipe.getName())) {
+        	for(int i = 0; i < NUM_RECIPES; i++) {
+	            if(oldRecipe.equals(recipeArray[i])) {
 	            	recipeArray[i] = new Recipe();
 	            	if(addRecipe(newRecipe)) {
 	            		canEditRecipe = true;
@@ -146,7 +146,7 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
      */
     public boolean addInventory(int amtCoffee, int amtMilk, int amtSugar, int amtChocolate) {
         boolean canAddInventory = true;
-        if(amtCoffee < 0 || amtMilk < 0 || amtSugar > 0 || amtChocolate < 0) {  
+        if(amtCoffee < 0 || amtMilk < 0 || amtSugar < 0 || amtChocolate < 0) {
             canAddInventory = false;
         }
         else {
@@ -182,7 +182,7 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
             canMakeCoffee = false;
         }
         if(canMakeCoffee) {
-	        inventory.setCoffee(inventory.getCoffee() + r.getAmtCoffee());
+	        inventory.setCoffee(inventory.getCoffee() - r.getAmtCoffee());
 	        inventory.setMilk(inventory.getMilk() - r.getAmtMilk());
 	        inventory.setSugar(inventory.getSugar() - r.getAmtSugar());
 	        inventory.setChocolate(inventory.getChocolate() - r.getAmtChocolate());
