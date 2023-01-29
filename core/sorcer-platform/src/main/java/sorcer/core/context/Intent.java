@@ -17,7 +17,7 @@
 
 package sorcer.core.context;
 
-import com.oracle.jrockit.jfr.EventInfo;
+//import com.oracle.jrockit.jfr.EventInfo;
 import sorcer.core.signature.LocalSignature;
 import sorcer.service.*;
 import sorcer.service.modeling.Functionality;

@@ -14,14 +14,12 @@ public class User {
     private String password;
     private String authKey;
     private Long rights = 0L;
-    public User(
-            Long _id,
+    public User(Long _id,
             String _userName,
             String _phoneNumber,
             String _email,
             String _password
-    )
-    {
+    ) {
         id = _id;
         userName = _userName;
         phoneNumber = _phoneNumber;
@@ -31,8 +29,7 @@ public class User {
         authKey = _id.toString();
     }
 
-    public User(Context _context)
-    {
+    public User(Context _context) {
         try {
             id = (Long)_context.getValue("id");
             userName = (String)_context.getValue("userName");
@@ -47,41 +44,31 @@ public class User {
 
         authKey = id.toString();
     }
-
     public  Long GetUserId()
     {
         return id;
     }
-
     public  String GetUserName()
     {
         return userName;
     }
-
-    public boolean SetUserName(String _userName)
-    {
+    public boolean SetUserName(String _userName) {
         userName = _userName;
         return true;
     }
-
     public String GetEmail()
     {
         return email;
     }
-
-    public boolean SetEmail(String _email)
-    {
+    public boolean SetEmail(String _email) {
         email = _email;
         return true;
     }
-
     public String GetPhoneNumber()
     {
         return phoneNumber;
     }
-
-    public boolean SetPhoneNumber(String _phoneNumber)
-    {
+    public boolean SetPhoneNumber(String _phoneNumber) {
         phoneNumber = _phoneNumber;
         return true;
     }
@@ -93,8 +80,7 @@ public class User {
     {
         return password;
     }
-    public boolean UpdatePassword(String _password)
-    {
+    public boolean UpdatePassword(String _password) {
         password = _password;
         return true;
     }
@@ -102,7 +88,6 @@ public class User {
     {
         return rights;
     }
-
     public Context getContext() throws ContextException {
         Context context = new ServiceContext();
         context.putValue("id", id);

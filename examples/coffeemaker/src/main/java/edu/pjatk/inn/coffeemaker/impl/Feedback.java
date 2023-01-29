@@ -1,5 +1,6 @@
 package edu.pjatk.inn.coffeemaker.impl;
 
+import edu.pjatk.inn.coffeemaker.interfaces.FeedbackServiceI;
 import sorcer.core.context.ServiceContext;
 import sorcer.service.Context;
 import sorcer.service.ContextException;
@@ -9,17 +10,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Feedback {
+public class Feedback implements FeedbackServiceI {
     private Long id;
     private Long userId;
     private String text;
     private Date date;
 
-    public Feedback(
-            Long _id,
-            Long _userId,
-            String _text)
-    {
+    public Feedback(Long _id, Long _userId, String _text) {
         id = _id;
         userId = _userId;
         text = _text;
@@ -28,8 +25,7 @@ public class Feedback {
         date = new Date(System.currentTimeMillis());
     }
 
-    public Feedback(Context _context)
-    {
+    public Feedback(Context _context) {
         try {
             id = (Long) _context.getValue("id");
             userId = (Long)_context.getValue("userId");
@@ -50,9 +46,8 @@ public class Feedback {
         return userId;
     }
 
-    public String GetFeedback()
-    {
-        return text;
+    public boolean addFeedback() {
+        return true;
     }
 
     public Date GetFeedbackTime()
@@ -67,4 +62,20 @@ public class Feedback {
         context.putValue("text", text);
         return context;
     }
+
+    @Override
+    public Context addFeedback(Context context) throws RemoteException, ContextException {
+        Feedback feedback = new Feedback(context);
+        boolean isAdded = addFeedback();
+        context.putValue("feedback/added", isAdded);
+        return context;
+    }
+
+    @Override
+    public Context getFeedback(Context context) throws RemoteException, ContextException {
+        Feedback feedback = new Feedback(context);
+        context.putValue("feedback/val", feedback.text);
+        return context;
+    }
+
 }

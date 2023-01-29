@@ -14,20 +14,12 @@ public class Order {
     private Long id;
     private Long userId;
     private Vector<Recipe> listOfRecipes;
-
-    public Order(
-            Long _id,
-            Long _userId,
-            Vector<Recipe> _listOfRecipes
-    )
-    {
+    public Order(Long _id, Long _userId, Vector<Recipe> _listOfRecipes) {
         id = _id;
         userId = _userId;
         listOfRecipes = _listOfRecipes;
     }
-
-    public Order(Context _context)
-    {
+    public Order(Context _context) {
         try {
             id = (Long) _context.getValue("id");
             userId = (Long)_context.getValue("userId");
@@ -38,27 +30,22 @@ public class Order {
             throw new RuntimeException(e);
         }
     }
-
     public Long GetId()
     {
         return id;
     }
-
     public Long GetUserId()
     {
         return userId;
     }
-
     public List<Recipe> GetListOfRecipes()
     {
         return listOfRecipes;
     }
-
     public void SetListOfRecipes(Vector<Recipe> _listOfRecipes)
     {
         listOfRecipes = _listOfRecipes;
     }
-
     public Context getContext() throws ContextException {
         Context context = new ServiceContext();
         context.putValue("id", id);
